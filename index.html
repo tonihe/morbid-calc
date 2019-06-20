@@ -2,82 +2,115 @@
 <html>
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Morbid Calculator</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>morbid calculator</title>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Oswald&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
 
 </head>
 
 <body onload="ajaxCall();">
-<header> 
-<!-- The Morbid Calculator -->
-    <h1 class="jumbotron"> <img src="vector-outline-skull.png" height="110" width="100" /> The morbid calculator </h1>
+  <header>
+    <!-- The Morbid Calculator -->
+    <h1 class="jumbotron"> <img src="vector-outline-skull.png" height="50" width="50" style="margin-left: 5vw;" /> morbid calculator </h1>
+
+  </header>
+
+
+
+  <div class="container">
+    <h2>average human lifespan: 79 years</h2>
+    <h2>There are approximately 22,075,000 seconds in a lifetime.</h2>
+    <h2>This page was made on June, 19, 2019 - which means on June 19, 2098</h2>
+    <h2>or more precisely : <mark><span id="the_end">--:--:--</span> </mark></h2>
+    <h2>anyone reading this now will likely cease to exist.</h2>
+
+    <p class="text_box">It is safe to assume, anyone reading this now will have gained basic literacy and if you're reading on, I assume you not only understand what I'm trying to convey but also has longer attention span of a teen.</p>
    
-</header>  
-
-<div class="container">
-    <!-- <button id="btn">hello</button> -->
-    <div class="row">
-        <div class="col-md-4">side-menu</div>
-        <div class="col-12 col-sm-6 col-lg-8">
+    <p class="text_box">I used to think to myself, wow, I have a lot of time - what am I going to do with all of my time? 
+      But is this really the case? Do I actually have a lot of time or is it just the illusion of time wrapped by the concept 
+      of weeks, months, years which gives the illusion of safety? </p>
 
 
-        What's your age? <input id="age" type="text"></input>  
-        </div>
-      </div>
-    
+    <p class="text_box">Time to find out.</p>
 
-  <div class="row">
-    <div class="col-md-4">side-menu</div>
-    <div class="col-12 col-sm-6 col-lg-8">
 
-    Country of residence?
-    <select id="sel_country" onchange="getValue()">
-    <option value=''>Select Country</option>
-    </select>
-  
-  </div>
+    <div class="q_col"> What's your age? <input id="age" type="text"></input> </div>
+
+
+    <div class="q_col">
+
+      Country of residence?
+      <select id="sel_country" onchange="getValue(this.value)">
+        <option value=''>Select Country</option>
+      </select>
+
+    </div>
+
   </div>
 
+  <button id="tell_me" type="submit">How Long Do I Actually Have?</button>
 
-  <div class="row">
-    <div class="col-md-4">side-menu</div>
-    <div id="c_list" class="col-12 col-sm-6 col-lg-8">.col-md-8</div>
-  </div>
+  <script type="text/javascript">
 
+    function ajaxCall() {
 
-  <div class="row">
-    <div class="col-md-4">side-menu</div>
-    <div class="col-12 col-sm-6 col-lg-8">.col-md-8</div>
-  </div>
+      var ourRequest = new XMLHttpRequest();
+      ourRequest.open('GET', 'https://tonihe.github.io/json_album/life.json');
+      ourRequest.send();
 
- 
-</div>
+      ourRequest.onload = function () {
+        var arr = JSON.parse(ourRequest.responseText);
 
-<script type="text/javascript">
+        var data_str = "";
+        var i;
 
-function ajaxCall(){
-
-var ourRequest = new XMLHttpRequest();
-    ourRequest.open('GET', 'https://tonihe.github.io/json_album/life.json');
-    ourRequest.send(); 
-
-        ourRequest.onload = function() {
-            var arr = JSON.parse(ourRequest.responseText);
-
-            var data_str = ""; 
-            var i; 
-            
-            for(i = 0; i < arr.length; i++) {
-            data_str += '<option value="' + arr[i].country + '">' + arr[i].country + '</option>' + 
+        for (i = 0; i < arr.length; i++) {
+          data_str += '<option value="' + arr[i].country + '">' + arr[i].country + '</option>' +
             arr[i].country + '<br>';
-            }
-            document.getElementById("sel_country").innerHTML = data_str;
+        }
+        document.getElementById("sel_country").innerHTML = data_str;
 
-           
-          }
-}
+
+      }
+    }
+
+
+      var the_end_of_seventynine = new Date("June 19, 2098 00:00:00").getTime();
+
+      var x = setInterval(function() {
+
+      // Get today's date and time
+      var now = new Date().getTime();
+  
+      // Find the distance between now and the count down date  
+      var distance = the_end_of_seventynine - now;
+  
+      // Time calculations for days, hours, minutes and seconds
+      var years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365.25)); 
+      var days = Math.floor(distance % (1000 * 60 * 60 *  24 * 365) / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+      // Output the result in an element with id="demo"
+      document.getElementById("the_end").innerHTML = years + " years "  + days + " days " + hours + " hours "
+      + minutes + " minutes " + seconds + " seconds ";
+  
+      // If the count down is over, write some text 
+      if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("the_end").innerHTML = ":( we've all expired";
+    }
+    }, 1000);
+
+    function getValue(x){
+
+    }
+
+
 
 
 // https://learnwebcode.github.io/json-example/animals-1.json <-- example tutorial pull link, example uses button.
@@ -87,22 +120,22 @@ var ourRequest = new XMLHttpRequest();
 
 
 // btn.addEventListener("click", function(){
-    
+
 //     var ourRequest = new XMLHttpRequest();
 //     ourRequest.open('GET', 'https://tonihe.github.io/json_album/life.json', true);
-        
+
 //         ourRequest.onload = function() {
 //             var arr = JSON.parse(ourRequest.responseText);
 
 //             var data_str = ""; 
 //             var i; 
-            
+
 //             for(i = 0; i < arr.length; i++) {
 //             data_str += '<option value="' + arr[i].country + '">' + arr[i].country + '</option>' + 
 //             arr[i].country + '<br>';
 //             }
 //             document.getElementById("sel_country").innerHTML = data_str;
-        
+
 // };
 
 // ourRequest.send();
@@ -111,18 +144,25 @@ var ourRequest = new XMLHttpRequest();
 
 
 
-</script>
+  </script>
 
   <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
 
 </body>
 
 <footer>
 
 </footer>
+
 </html>
