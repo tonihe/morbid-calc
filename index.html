@@ -128,8 +128,10 @@
 
     if(life_remaining <= 0){
     document.getElementById("this_is_you").innerHTML = "Congratulations, you've exceeded average lifespan for your region.";
+    document.getElementById("age").contentWindow.location.reload(true);
     } else {
-    document.getElementById("this_is_you").innerHTML = life_remaining + " years remaining.";
+    document.getElementById("this_is_you").innerHTML = "your life clock : " + life_remaining + " years remaining.";
+    document.getElementById("age").contentWindow.location.reload(true);
     }
 
   }
