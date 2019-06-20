@@ -18,6 +18,10 @@ h2 {
   margin: 5vh 5vh; 
 }
 
+#the_end, #your_country, #your_country_lx {
+    background-color: #FFC726; 
+}
+
 .q_col {
     margin: 10px;
 }
