@@ -36,22 +36,30 @@
 
     <p class="text_box">Time to find out.</p>
 
+    <p class="text_box">According to the calculations based on the information you gave: </p>
+    
+    <p class="text_box">Based on your country of residence selected: <mark><span id="your_country"></span></mark> years.</p>
+    <p class="text_box">The average life expectancy of the country is <mark><span id="your_country_lx"></span></mark></p>
+    
+    <p class="text_box"> A moment of truth: </p>
 
-    <div class="q_col"> What's your age? <input id="age" type="text"></input> </div>
-
+    <h2><div id="this_is_you"></div></h2>
 
     <div class="q_col">
 
-      Country of residence?
-      <select id="sel_country" onchange="getValue(this.value)">
-        <option value=''>Select Country</option>
-      </select>
-
-    </div>
+        Country of residence?
+        <select id="sel_country" onchange="getValue(this.value)">
+          <option value=''>Select Country</option>
+        </select>
+  
+      </div>
+    
+    <div class="q_col"> What's your age? <input name="age" id="age" type="text" onchange="actualTime(this.value)"></input> </div>
 
   </div>
 
-  <button id="tell_me" type="submit">How Long Do I Actually Have?</button>
+
+  <button id="tell_me" type="submit" onclick="actualTime(x)">How Long Do I Actually Have?</button>
 
   <script type="text/javascript">
 
@@ -76,6 +84,57 @@
 
       }
     }
+
+    function getValue(x){
+
+      var selected_country = x; 
+      document.getElementById("your_country").innerHTML = x; 
+      
+      console.log(x);
+
+      var i;
+      var y; 
+      var ourRequest = new XMLHttpRequest();
+      ourRequest.open('GET', 'https://tonihe.github.io/json_album/life.json');    
+      ourRequest.send();  
+      ourRequest.onload = function () { 
+      var json_data = JSON.parse(ourRequest.responseText);
+
+      for(i = 0; i < json_data.length; i++){
+
+      if(x == json_data[i].country){
+      
+      y = json_data[i].expectancy;
+      // console.log(json_data[i].country);
+      // console.log(json_data[i].expectancy);
+      
+      document.getElementById("your_country_lx").innerHTML = y; 
+
+      }
+        }
+
+      }
+    }
+
+    function actualTime(x){
+
+    var age = x; 
+    console.log(age);
+
+    var keeping_it_real = document.getElementById("your_country_lx").innerHTML;
+    
+    console.log(keeping_it_real);
+    var life_remaining = keeping_it_real - age;
+
+    if(life_remaining <= 0){
+    document.getElementById("this_is_you").innerHTML = "Congratulations, you've exceeded average lifespan for your region.";
+    } else {
+    document.getElementById("this_is_you").innerHTML = life_remaining + " years remaining.";
+    }
+
+  }
+
+
 
 
       var the_end_of_seventynine = new Date("June 19, 2098 00:00:00").getTime();
@@ -105,10 +164,6 @@
       document.getElementById("the_end").innerHTML = ":( we've all expired";
     }
     }, 1000);
-
-    function getValue(x){
-
-    }
 
 
 
