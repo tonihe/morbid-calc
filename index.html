@@ -2,82 +2,73 @@
 <html>
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Morbid Calculator</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Morbid Calculator</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
 
 </head>
 
 <body onload="ajaxCall();">
-<header> 
-<!-- The Morbid Calculator -->
-    <h1 class="jumbotron"> <img src="vector-outline-skull.png" height="110" width="100" /> The morbid calculator </h1>
-   
-</header>  
+  <header>
+    <!-- The Morbid Calculator -->
+    <h1 class="jumbotron"> <img src="vector-outline-skull.png" height="50" width="50" /> The morbid calculator </h1>
 
-<div class="container">
-    <!-- <button id="btn">hello</button> -->
-    <div class="row">
-        <div class="col-md-4">side-menu</div>
-        <div class="col-12 col-sm-6 col-lg-8">
+  </header>
 
 
-        What's your age? <input id="age" type="text"></input>  
-        </div>
-      </div>
-    
 
-  <div class="row">
-    <div class="col-md-4">side-menu</div>
-    <div class="col-12 col-sm-6 col-lg-8">
-
-    Country of residence?
-    <select id="sel_country" onchange="getValue()">
-    <option value=''>Select Country</option>
-    </select>
-  
-  </div>
-  </div>
+  <div class="container">
+    <div id="subhead">because life is precious.</div>
 
 
-  <div class="row">
-    <div class="col-md-4">side-menu</div>
-    <div id="c_list" class="col-12 col-sm-6 col-lg-8">.col-md-8</div>
+    <div class="q_col"> What's your age? <input id="age" type="text"></input> </div>
+
+
+
+
+    <div class="q_col">
+
+      Country of residence?
+      <select id="sel_country" onchange="getValue()">
+        <option value=''>Select Country</option>
+      </select>
+
+    </div>
+
+
+
+
   </div>
 
+  <script type="text/javascript">
 
-  <div class="row">
-    <div class="col-md-4">side-menu</div>
-    <div class="col-12 col-sm-6 col-lg-8">.col-md-8</div>
-  </div>
+    function ajaxCall() {
 
- 
-</div>
+      var ourRequest = new XMLHttpRequest();
+      ourRequest.open('GET', 'https://tonihe.github.io/json_album/life.json');
+      ourRequest.send();
 
-<script type="text/javascript">
+      ourRequest.onload = function () {
+        var arr = JSON.parse(ourRequest.responseText);
 
-function ajaxCall(){
+        var data_str = "";
+        var i;
 
-var ourRequest = new XMLHttpRequest();
-    ourRequest.open('GET', 'https://tonihe.github.io/json_album/life.json');
-    ourRequest.send(); 
-
-        ourRequest.onload = function() {
-            var arr = JSON.parse(ourRequest.responseText);
-
-            var data_str = ""; 
-            var i; 
-            
-            for(i = 0; i < arr.length; i++) {
-            data_str += '<option value="' + arr[i].country + '">' + arr[i].country + '</option>' + 
+        for (i = 0; i < arr.length; i++) {
+          data_str += '<option value="' + arr[i].country + '">' + arr[i].country + '</option>' +
             arr[i].country + '<br>';
-            }
-            document.getElementById("sel_country").innerHTML = data_str;
+        }
+        document.getElementById("sel_country").innerHTML = data_str;
 
-           
-          }
-}
+
+      }
+    }
+
+    function getValue(){
+      
+    }
 
 
 // https://learnwebcode.github.io/json-example/animals-1.json <-- example tutorial pull link, example uses button.
@@ -87,22 +78,22 @@ var ourRequest = new XMLHttpRequest();
 
 
 // btn.addEventListener("click", function(){
-    
+
 //     var ourRequest = new XMLHttpRequest();
 //     ourRequest.open('GET', 'https://tonihe.github.io/json_album/life.json', true);
-        
+
 //         ourRequest.onload = function() {
 //             var arr = JSON.parse(ourRequest.responseText);
 
 //             var data_str = ""; 
 //             var i; 
-            
+
 //             for(i = 0; i < arr.length; i++) {
 //             data_str += '<option value="' + arr[i].country + '">' + arr[i].country + '</option>' + 
 //             arr[i].country + '<br>';
 //             }
 //             document.getElementById("sel_country").innerHTML = data_str;
-        
+
 // };
 
 // ourRequest.send();
@@ -111,18 +102,25 @@ var ourRequest = new XMLHttpRequest();
 
 
 
-</script>
+  </script>
 
   <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
 
 </body>
 
 <footer>
 
 </footer>
+
 </html>

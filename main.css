@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex; 
+    flex-direction: column;
+}
+
+#subhead {
+  margin: 5vh 5vh; 
+}
+
+.q_col {
+    margin: 10px;
+}
